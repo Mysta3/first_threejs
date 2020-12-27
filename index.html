@@ -7,7 +7,7 @@
     <style>body{ margin: 0; }</style>
 </head>
 <body>
-
+    <h1>My First ThreeJS project</h1>
     <script src="script.js"></script>
     <script>
         const scene = new THREE.Scene();
@@ -27,6 +27,7 @@
         camera.position.z = 5; // move camera position out a bit so that the cube is not within the camera.
 
         // ADD RENDER/ANIMATE LOOP
+        // needed in order to have objects rendered to screen.
         function animate(){
             requestAnimationFrame( animate );
             cube.rotation.x += 0.01;
