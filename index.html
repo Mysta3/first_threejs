@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title> My 3 Js</title>
-    <style>body{ margin: 0; }</style>
+    <style>body{ display: flex; flex-direction: column; margin: 0; }</style>
 </head>
 <body>
     <h1>My First ThreeJS project</h1>
@@ -19,19 +19,34 @@
 
 
         // Add A CUBE
-        const geometry = new THREE.BoxGeometry(); //shapes
-        const material = new THREE.MeshBasicMaterial( {color: 0xd4af37 }); //colors and textures
-        const cube = new THREE.Mesh( geometry, material); //adds both shape and colors together
+        const cube_geometry = new THREE.BoxGeometry(5 ,10,15); //shapes
+        const cube_material = new THREE.MeshBasicMaterial( {color: 0xd4af37 }); //colors and textures
+        const cube = new THREE.Mesh( cube_geometry, cube_material); //adds both shape and colors together
+        cube.position.x = 15;
         scene.add(cube); //add cube to scene -> default cube is at coordinates 0,0,0.
 
-        camera.position.z = 5; // move camera position out a bit so that the cube is not within the camera.
+        // ADD A CONE
+        const cone_geometry = new THREE.ConeGeometry(5, 10, 15);
+        const cone_material = new THREE.MeshBasicMaterial( {color: 0x6a0dad });
+        const cone = new THREE.Mesh( cone_geometry, cone_material);
+        scene.add(cone)
+
+        // Add a Ring
+        const ring_geometry = new THREE.RingGeometry( 1, 5, 32);
+        const ring_material = new THREE.MeshBasicMaterial({ color: 0x4b8b3b, side: THREE.DoubleSide });
+        const ring = new THREE.Mesh( ring_geometry, ring_material);
+        ring.position.x = -15;
+        scene.add(ring)
+
+        camera.position.z = 35; // move camera position out a bit so that the cube is not within the camera.
 
         // ADD RENDER/ANIMATE LOOP
         // needed in order to have objects rendered to screen.
         function animate(){
             requestAnimationFrame( animate );
-            cube.rotation.x += 0.01;
-            cube.rotation.y += 0.01;
+            cube.rotation.x += 0.05;
+            cone.rotation.z -= 0.05;
+            ring.rotation.y += 0.05;
             renderer.render( scene, camera );
         }
         animate();
